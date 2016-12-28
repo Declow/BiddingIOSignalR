@@ -1,0 +1,116 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="container">
+    <div class="page-header">
+        <h1>Welcome to bidding.io</h1>
+        <p class="lead">Basic auction system using ASP.NET and SignalR to update data.</p>
+    </div>
+    <div class="row">
+        <div class="col-lg-5">
+            <div class="panel panel-default">
+                <div class="panel-heading">Create auction</div>
+                <div class="panel-body">
+                    <div id="createAuction">
+                        <h1 style="margin-top:0px" id="createAuctionTitle"></h1>
+                        <p class="lead" id="createAuctionDesc"></p>
+
+                        <div class="form-group">
+                            <label for="setEnding">Title:</label>
+                            <input type="text" class="form-control" id="setTitle" placeholder="Title">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="setDescription">Description:</label>
+                            <textarea class="form-control" id="setDescription"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="setEnding">Ending date:</label>
+                            <input type="date" class="form-control" id="setEnding" placeholder="dd-mm-yyyy">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="setQuantity">Quantity:</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">Units</div>
+                                <input type="number" class="form-control" id="setQuantity" placeholder="Number of units">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="minAmount">Minimum amount:</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">DKK</div>
+                                <input type="number" class="form-control" id="minAmount" placeholder="Minimum amount">
+                            </div>
+                        </div>
+                        
+                        <button type="submit" id="btnCreate" class="btn btn-primary">Create auction</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Current active auctions</div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Auction title</th>
+                                <th>Current bidding</th>
+                                <th>Auction ends at</th>
+                                <th width="104px">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="auctionList">
+                            <tr>
+                                <th></th>
+                                <td></td>
+                                <td>Loading data...</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Auction information</div>
+                    <div class="panel-body">
+                        <div id="auctionNotYet">
+                            <p>Please select an auction...</p>
+                        </div>
+                        <div id="auctionDetails" style="display:none">
+                            <h1 style="margin-top:0px" id="auctionTitle"></h1>
+                            <p class="lead" id="auctionDesc"></p>
+                            <p id="auctionId" style="display:none"></p>
+                            <p><b>Created:</b> <span id="auctionCreateDate"></span></p>
+                            <p><b>Ending:</b> <span id="auctionEndDate"></span></p>
+                            <p><b>Quantity:</b> <span id="auctionQuantity"></span></p>
+                            <p><b>Price:</b> <span id="auctionPrice"></span> DKK</p>
+                            <div class="form-group">
+                                <label for="userBid">Your bid:</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">DKK</div>
+                                    <input type="number" class="form-control" id="userBid" placeholder="Amount">
+                                </div>
+                            </div>
+                            <button type="submit" id="btnSubmit" class="btn btn-primary">Place your bid</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/jquery.signalR-2.2.1.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script src="~/Scripts/updater.js"></script>
+}
